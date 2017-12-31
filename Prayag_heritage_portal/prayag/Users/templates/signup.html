@@ -1,0 +1,56 @@
+{% extends "prayag/base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block extra_head %}
+<style type="text/css">
+.color-red, .red {color: red;}
+.input-width { width: 60% }
+</style>
+{% endblock extra_head %}
+
+{% block main_content %}
+
+<div id="content">
+  <div class="background-white">
+      <!-- Register Box -->
+      <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+       {% if form.field_errors %}
+       {% for error in form.non_field_errors %}
+       <div class="alert alert-danger alert-dismissable" align="center">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        Please enter a correct Contact no. and password.
+      </div>
+      {% endfor %} 
+      {% endif %}
+    <div align="center">
+      {% if error %}
+      <span class="red" style="background-color: white;">Please enter a correct Contact no/Phone. and password(of length >=4).</span>
+      {% endif %}
+      <form class="signup-page" method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="signup-header">
+          <h2><strong>Register a new account</strong></h2>
+          <p>Already a member? Click
+            <a href="{% url 'login' %}"> HERE</a> to login to your account.</p>
+          </div>
+          {{form|crispy}}
+            <span class="text-center">
+              <button class="btn btn-info btn-lg" type="submit">Register</button>
+            </span>
+          <br>
+      </form>
+    </div>
+    </div>
+    <!-- End Register Box -->
+  </div>
+</div>
+</div>
+
+{% endblock main_content %}
+
+
+{% block extra_js %}
+{% endblock extra_js %}

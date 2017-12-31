@@ -1,0 +1,10 @@
+	body {
+		margin: 0px auto; padding: 0px; min-width: 420px; font-family: sans-serif; 
+		background-image:url('/static/assets/img/background.gif');
+		background-repeat:no-repeat;
+		background-attachment: fixed;
+		background-size:100%;"
+	}
+	.clb {clear: both; height: 0px}
+	#top {position: fixed; width: 1000px; height: 52px; left: 0px; top: 0px; right: 0px;  z-index: 10; overflow-y: hidden}
+	#topcr {float: right; margin: 0px; height: 72px; margin-top: -25px; padding: 15px; width: 400px}

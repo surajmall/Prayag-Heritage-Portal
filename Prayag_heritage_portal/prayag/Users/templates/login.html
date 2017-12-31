@@ -1,0 +1,84 @@
+{% extends "prayag/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+
+
+{% block main_content %}
+
+<br><br>
+
+<div id="content">
+  <div class="background-white">
+    <!-- Register Box -->
+    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+
+     {% if form.field_errors %}
+     {% for error in form.non_field_errors %}
+     <div class="alert alert-danger alert-dismissable" align="center">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      Please enter a correct Contact no. and password. Note that password may be case-sensitive.
+    </div>
+    {% endfor %} 
+    {% endif %}
+    <div align="center">
+
+      {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+      <div class="alert alert-danger alert-dismissable center">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        Please enter a correct Contact no. and password. Note that password may be case-sensitive.
+      </div>
+      {% endfor %} 
+      {% endif %}
+      <form class="login-page" method="post" action="login">
+        {% csrf_token %}
+        <div class="login-header margin-bottom-30">
+          <h2>Login to your account</h2>
+        </div>
+        <div class="input-group margin-bottom-20">
+          <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input placeholder="Email/Phone" name="username" class="form-control" type="text">
+          {% for error in form.username.errors %}
+          <label class="control-label"><span class="red">{{ error }}</span></label>
+          {% endfor %}
+        </div>
+
+        <div class="input-group margin-bottom-20">
+          <span class="input-group-addon">
+            <i class="fa fa-lock"></i>
+          </span>
+          <input placeholder="Password" class="form-control" name="password" type="password">
+          {% for error in form.password.errors %}
+          <label class="control-label"><span class="red">{{ error }}</span></label>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4" style="margin-bottom:7px;">
+            <button class="btn btn-success" type="submit" style="width: 100px;">Login</button>
+          </div>
+          <br>Forgot Password ?<br>
+          <div class="col-md-4 " style="margin-bottom: 50px;">
+            <button class="btn btn-warning"style="width: 150px;"><a href="{% url 'password_reset' %}">Reset Password</a></button>
+          </div>          
+        </div>
+
+        <br>
+      </form>
+    </div>
+  </div>
+  <!-- End Register Box -->
+</div>
+</div>
+</div>
+
+{% include 'prayag/quote_section.html' %}
+
+{% endblock main_content %}
+
+
+{% block extra_js %}
+{% endblock extra_js %}

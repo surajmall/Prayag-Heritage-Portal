@@ -1,0 +1,290 @@
+{% load staticfiles %}
+
+<style type="text/css">
+
+.typeahead, .tt-query, .tt-hint {
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  font-size: 1.2em;
+  height: 35px;
+  line-height: 35px;
+  outline: medium none;
+  /*padding: 4px 12px;  */
+  width: 150px;
+  margin-left: 0px;
+}
+.typeahead {
+  background-color: #FFFFFF;
+}   
+.typeahead:focus {
+  border: 2px solid #0097CF;
+}
+.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.tt-hint {
+  color: #999999;
+}   
+
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+  padding: 8px 0;
+  width: 350px;
+  overflow:scroll;
+  max-height: 400px;
+}
+.tt-suggestion {
+  font-size: 1em;
+  line-height: 20px;
+  padding: 3px 20px;
+  color: #008080;
+}
+.tt-suggestion { cursor: pointer; }
+
+.tt-suggestion.tt-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+
+#search input[type="text"] {
+  /*background: url("{% static 'img/search.png' %}") no-repeat 10px 6px #fcfcfc;*/
+  border: 1px solid #d1d1d1;
+  font: 14px Arial,Helvetica,Sans-serif ;
+  color: gray; #bebebe;
+  width: 300px;
+  padding: 6px 15px 6px 35px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+  background-color: white;
+  autocomplete:off;
+}
+
+input { background-color: white; }
+
+</style>
+
+
+<div id="hornav" class="container no-padding">
+    <div class="col-md-12 no-padding">
+      <div class="text-center visible-lg">
+        <ul id="hornavmenu" class="nav navbar-nav">
+          <li>
+            <a href="{% url 'home' %}" class="fa-home">Home</a>
+          </li>
+          <li>
+            <span class="fa-gears">HighLights</span>
+            <ul>
+              <li class="parent">
+                <span>About</span>
+                <ul>
+                  <li>
+                    <a href="{% url 'history' %}">History</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="parent">
+                <span>Future Events</span>
+                <ul>
+                  <li>
+                    <a href="{% url 'temp_event' %}">Magh Fair-2018</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'coming_soon' %}">Kumbh Fair-2019</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="{% url 'layout' %}">Allahabad on Map</a>
+              </li>
+              <li>
+                <a href="#alld_attr">Allahabad Attractions</a>
+              </li>
+              <li>
+                <a href="{% url 'views_360' %}">360 Views</a>
+              </li>
+              <li>
+                <a href="{% url 'img_show_all' %}">See All Images</a>
+              </li>
+              <li>
+                <a href="{% url 'video_show_all' %}">See All Videos</a>
+              </li>
+
+            </ul>
+          </li>   
+
+          <li> 
+            <span class="fa-th">Explore</span>
+            <ul>
+              <li>
+                <a href="{% url 'explore' 'spiritual' %}">Spiritual Places</a>
+              </li>
+              <li>
+                <a href="{% url 'explore' 'sanctuaries' %}">Wildlife Sanctuaries</a>
+              </li>
+              <li>
+                <a href="{% url 'explore' 'museum' %}">Museums</a>
+              </li>
+              <li>
+                <a href="{% url 'explore' 'monument' %}">Monuments</a>
+              </li>
+              <li>
+                <a href="{% url 'explore' 'entertainment' %}">Entertainments</a>
+              </li>
+              <li>
+                <a href="{% url 'explore' 'heritage' %}">Heritage</a>
+              </li>
+            </ul>
+          </li>    
+
+          <li>
+            <span class="fa-copy">Plan Your Trip</span>
+            <ul>
+              <li>
+                <a href="{% url 'coming_soon' %}">Book Tickets</a>
+              </li>
+              <li>
+                <a href="{% url 'weather_layout' %}">Weather Info</a>
+              </li>
+              <li>
+                <a href="{% url 'maps_distance' %}">Optimal Distances</a>
+              </li>
+              <li class="parent">
+                <span>Stay and Visit</span>
+                <ul>
+                  <li>
+                    <a href="{% url 'stay_visit' %}">Hotels</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'stay_visit' %}">Restaurants</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'stay_visit' %}">Malls</a>
+                  </li>
+                </ul>
+              </li>   
+            </ul>
+          </li>
+          <li>
+            <span class="fa-font">About</span>
+            <ul>
+              <li>
+                <a href="{% url 'contact' %}">Contact Us</a>
+              </li>
+              <li>
+                <a href="{% url 'feedback' %}">Feedback</a>
+              </li>
+              <li>
+                <a href="{% url 'acknowledge' %}">Acknowledgements</a>
+              </li>
+            </ul>
+          </li>
+          <li class="parent">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}">
+              <span class="fa-font">{{request.user.first_name}}</span>
+            </a>
+            <ul>
+              <li>
+                <a href="{% url 'change_password' %}">Change Password</a>
+              </li>
+              <li>
+                <a href="{% url 'logout' %}">Logout</a>
+              </li>                                            
+            </ul>                                   
+          {% else %}
+          <span class="fa-font">Join Us</span>
+          <ul>
+            <li>
+              <a href="{% url 'signup' %}">Register</a>
+            </li>
+            <li>
+              <a href="{% url 'login' %}">Login</a>
+            </li>
+          </ul>
+        {% endif %}
+        </li> 
+      </ul>
+    </div>
+</div>
+</div>
+
+
+<br><br>
+
+<hr>
+  <div id="search_box" align="center">
+    <form role="search" action="{% url 'search' %}" id="search">
+        <input type="text" class="form-control typeahead" name="q" id="to" placeholder="Search Tourism Places" style="background-color: white; color: green;">
+    </form>
+  </div>
+
+<br>
+
+<!-- Currently not in use
+<script src="{% static 'jquery/jquery.ui.min.js' %}"></script>
+<script src="{% static 'jquery/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'jquery/jquery.bullseye-1.0-min.js' %}"></script>
+-->
+
+{% block extra_js %}
+
+<script type="text/javascript">
+
+$(function () {
+
+  var substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      var matches, substringRegex;
+      matches = [];
+      substrRegex = new RegExp(q, 'i');
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str)) {
+          matches.push({ value: str });
+        }
+      });
+      cb(matches);
+    };
+  };
+
+  $.ajax({
+    url: '/search/',
+    cache: false,  
+    success: function (data) { 
+      $('#to').typeahead({ 
+        hint: true,
+        highlight: true,
+        minLength: 0,
+      },
+      {
+        name: 'data',
+        displayKey: 'value',
+        source: substringMatcher(data)
+      }).on('typeahead:closed', function (obj, datum, name) {
+        $(obj.currentTarget).val("");
+      });
+      
+    }
+  }); 
+
+});
+
+</script>
+
+{% endblock extra_js %}

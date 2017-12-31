@@ -1,0 +1,100 @@
+{% extends "prayag/base.html" %}
+{% load staticfiles %}
+
+{% block extra_head %}
+{% endblock extra_head %}
+
+{% block main_content %}
+<!-- === END HEADER === -->
+<!-- === BEGIN CONTENT === -->
+<div id="content">
+  <div class="background-white">
+
+    <div class="row margin-vert-30" >
+      <div class="col-md-12">
+        <h2>Explore {{place_type}} in Allahabad</h2>
+        <!-- Filter Buttons -->   
+        <div class="portfolio-filter-container margin-top-20">
+          <ul class="portfolio-filter">
+            <li class="portfolio-filter-label label label-primary">
+              filter by:
+            </li>
+            <li>
+              <a href="#" class="portfolio-selected btn btn-default" data-filter="*">All</a>
+            </li>
+            <li>
+              <a href="#" class="btn btn-default" data-filter=".pictures">Pictures</a>
+            </li>
+            <li>
+              <a href="#" class="btn btn-default" data-filter=".video">Video</a>
+            </li>
+          </ul>
+        </div>
+        <!-- End Filter Buttons -->
+      </div>
+    </div>
+
+    <div class="background-gray-lighter">
+      <div class="row padding-vert-20">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <!-- Portfolio -->
+          <ul class="portfolio-group">
+            <!-- Portfolio Item -->
+            {% for place in related_places %}
+            {% if place.image.image %}
+            <li class="portfolio-item col-md-6 col-sm-6 padding-20">
+              <a href="{% url 'place_detail' place.slug %}">
+                <figure class="animate fadeInLeft">
+                  {% if place.image %}
+                  <img alt="image1" class="img" 
+                  src="{{place.image.image.url}}" style="img img-responsive">
+                  {% endif %}
+                  <figcaption>
+                    <h3>{{place.name}}</h3>
+                    <span>{{place.description|truncatechars:155}}</span>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <!-- //Portfolio Item// -->
+            {% endif %}
+            {% endfor %}
+          </ul>
+          <!-- End Portfolio -->
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+    </div>
+    
+    <!-- End Portfolio Item -->
+    <!-- Portfolio Item -->
+    <div class="col-md-4 portfolio-item margin-bottom-40 video">
+      <div>
+        <a href="#">
+          <figure>
+            <video controls>
+              <source src="{{place.video.video.url}}" type="video/mp4">
+              </video>
+              <figcaption>
+                <h3 class="margin-top-20">{{place.name}}</h3>
+                <span>{{place.description}}</span>
+              </figcaption>
+            </figure>
+          </a>
+        </div>
+      </div>
+      <!-- End Portfolio Item -->
+      <!-- Portfolio Item -->
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- === END CONTENT === -->
+{% endblock main_content %}
+
+{% block extra_js %}
+{% endblock extra_js %}
